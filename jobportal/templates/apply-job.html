@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Apply Job</title>
+
+    <link rel="stylesheet"
+    href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        JobPortal
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'jobs' %}">Explore Jobs</a></li>
+    </ul>
+
+</nav>
+
+<section class="apply-section">
+
+<div class="apply-card">
+
+    <h1>Apply for {{ job.title }}</h1>
+
+    <h3>{{ job.company }}</h3>
+
+    <p class="job-location">
+        📍 {{ job.location }}
+    </p>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <label>Full Name</label>
+        {{ form.candidate_name }}
+
+        <label>Email Address</label>
+        {{ form.email }}
+
+        <label>Phone Number</label>
+        {{ form.phone }}
+
+
+        <label>Skills</label>
+        {{ form.skills }}
+
+        <label>Upload Resume</label>
+        {{ form.resume }}
+
+        <label>Cover Letter</label>
+        {{ form.cover_letter }}
+
+        <button
+            type="submit"
+            class="apply-submit-btn">
+
+            Submit Application
+
+        </button>
+
+    </form>
+
+</div>
+
+</section>
+
+</body>
+
+</html>

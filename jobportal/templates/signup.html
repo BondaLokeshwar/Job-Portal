@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet"
+href="{% static 'css/style.css' %}">
+</head>
+<body class="signup-body">
+
+<div class="form-container">
+
+    <h2>Create Account</h2>
+
+    {% if form.errors %}
+    <div style="color:red; text-align:center; margin-bottom:15px;">
+        {{ form.errors }}
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <p style="color:red; text-align:center;">
+        {{ error }}
+    </p>
+    {% endif %}
+
+    <form method="POST">
+    {% csrf_token %}
+
+        <input type="text"
+            name="first_name"
+            placeholder="First Name"
+            required>
+
+        <input type="email"
+            name="email"
+            placeholder="Email"
+            required>
+
+        <input type="password"
+            name="password"
+            placeholder="Password"
+            required>
+
+        <input type="password"
+            name="confirm_password"
+            placeholder="Confirm Password"
+            required>
+
+        <button type="submit">
+            Sign Up
+        </button>
+
+    </form>
+
+    <p>
+        Already have an account?
+        <a href="{% url 'login' %}">Login</a>
+    </p>
+
+</div>
+ <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

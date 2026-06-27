@@ -1,0 +1,308 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobPortal</title>
+<link rel="stylesheet"
+href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span>Job</span>Portal
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="{% url 'home' %}">Home</a></li>
+
+        <li><a href="{% url 'jobs' %}">Jobs</a></li>
+
+        <li><a href="#">Companies</a></li>
+
+        <li><a href="#">About Us</a></li>
+
+        <li><a href="#">Contact</a></li>
+
+    </ul>
+
+    <div class="nav-buttons">
+
+    {% if request.user.is_authenticated %}
+
+        <span class="welcome-btn">
+            Hi, {{ request.user.first_name }}
+        </span>
+
+        <a href="{% url 'logout' %}" class="signup-btn">
+            Logout
+        </a>
+
+    {% else %}
+
+        <a href="{% url 'login' %}" class="login-btn">
+            Login
+        </a>
+
+        <a href="{% url 'signup' %}" class="signup-btn">
+            Sign Up
+        </a>
+
+    {% endif %}
+
+    </div>
+
+</nav>
+
+
+<section class="hero">
+
+<div class="hero-content">
+
+    <span class="hero-tag">
+        🚀 Trusted by 50,000+ Job Seekers
+    </span>
+
+    <h1>
+        Find Your Dream Job <br>
+        and <span>Build Your Future</span>
+    </h1>
+    <p>
+        Connect with top employers, discover thousands of opportunities,
+        and take the next step in your professional career.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="/jobs/" class="primary-btn">
+            Explore Jobs
+        </a>
+
+        <a href="/post-job/" class="secondary-btn">
+            Post a Job
+        </a>
+
+    </div>
+
+    <div class="hero-stats">
+
+        <div>
+            <h3>10K+</h3>
+            <p>Active Jobs</p>
+        </div>
+
+        <div>
+            <h3>500+</h3>
+            <p>Companies</p>
+        </div>
+
+        <div>
+            <h3>50K+</h3>
+            <p>Candidates</p>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<section class="search-section">
+
+    <input type="text" placeholder="Job title, keywords">
+
+    <input type="text" placeholder="Location">
+
+    <button>Search Jobs</button>
+
+</section>
+
+
+
+
+<section class="categories">
+
+    <h2>Popular Categories</h2>
+
+    <p class="section-subtitle">
+        Explore jobs by your interest and build your dream career
+    </p>
+
+    <div class="category-container">
+
+        <div class="category-card">
+            <div class="category-icon">💻</div>
+            <h3>Development</h3>
+            <p>2,300+ Jobs</p>
+        </div>
+
+        <div class="category-card">
+            <div class="category-icon">📊</div>
+            <h3>Data Science</h3>
+            <p>1,200+ Jobs</p>
+        </div>
+
+        <div class="category-card">
+            <div class="category-icon">✏️</div>
+            <h3>Design</h3>
+            <p>950+ Jobs</p>
+        </div>
+
+        <div class="category-card">
+            <div class="category-icon">📢</div>
+            <h3>Marketing</h3>
+            <p>1,500+ Jobs</p>
+        </div>
+
+        <div class="category-card">
+            <div class="category-icon">🏦</div>
+            <h3>Finance</h3>
+            <p>1,100+ Jobs</p>
+        </div>
+
+        <div class="category-card">
+            <div class="category-icon">🛡️</div>
+            <h3>Cyber Security</h3>
+            <p>780+ Jobs</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="why-us">
+
+    <h2>Why Choose JobPortal?</h2>
+
+    <p class="section-subtitle">
+        We help you find the best opportunities and grow your career.
+    </p>
+
+    <div class="features">
+
+        <div class="feature">
+            <div class="feature-icon">✔️</div>
+            <h3>Verified Companies</h3>
+            <p>
+                All companies are verified and trustworthy.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3>Easy Application</h3>
+            <p>
+                Apply for jobs in one click and save your time.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">📈</div>
+            <h3>Career Growth</h3>
+            <p>
+                Find the right opportunities to grow your career.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🔔</div>
+            <h3>Job Alerts</h3>
+            <p>
+                Get personalized job alerts straight to your inbox.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="newsletter">
+
+    <h2>Get Job Alerts</h2>
+
+    <input type="email" placeholder="Enter your email">
+
+    <button>Subscribe</button>
+
+</section>
+
+<footer>
+
+    <div class="footer-contact">
+
+        <h3>Contact</h3>
+
+        <p>support@jobportal.com</p>
+
+    </div>
+
+</footer>
+
+<section class="featured-jobs">
+
+     <h2>Latest Jobs</h2>
+
+    <div class="job-container">
+
+        {% for job in latest_jobs %}
+
+    <div class="job-card">
+
+    <h3>{{ job.title }}</h3>
+
+            <p><strong>{{ job.company }}</strong></p>
+
+            <p>📍 {{ job.location }}</p>
+
+            <p>💰 {{ job.salary }}</p>
+
+            <p>💼 {{ job.job_type }}</p>
+
+            <a href="{% url 'apply_job' job.id %}">
+                <button>Apply Now</button>
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p>No jobs available.</p>
+
+        {% endfor %}
+
+    </div>
+
+    
+
+    
+
+</section>
+
+<section class="companies">
+
+    <h2>Top Companies</h2>
+
+    <div class="company-container">
+
+        <img src="{% static 'images/company1.jpg' %}">
+        <img src="{% static 'images/company2.jpg' %}">
+        <img src="{% static 'images/company3.jpg' %}">
+
+    </div>
+
+</section>
+
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

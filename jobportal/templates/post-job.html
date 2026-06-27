@@ -1,0 +1,168 @@
+    {% load static %}
+    <!DOCTYPE html>
+
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job - JobPortal</title>
+    <link rel="stylesheet"
+        href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+
+    <nav class="employer-nav">
+
+    <div class="logo">JobPortal</div>
+
+    <ul>
+        <a href="{% url 'home' %}">Home</a>
+        <li><a href="#">Post a Job</a></li>
+        <li><a href="#">Find CVs</a></li>
+        
+    </ul>
+
+    </nav>
+
+    <section class="employer-hero">
+
+    <div class="hero-left">
+
+
+        <span class="badge">
+            FOR EMPLOYERS
+        </span>
+
+        <h1>
+            Let's hire your next great candidate. Fast.
+        </h1>
+
+        <p>
+            No matter the skills, experience or qualifications
+            you're looking for, you'll find the right people here.
+        </p>
+
+    </div>
+
+    <div class="hero-right">
+
+        <div class="employer-card">
+
+            <h2>Post a New Job</h2>
+            <p class="form-subtitle">
+                Fill in the details below to publish your job opening.
+            </p>
+
+            <form method="POST">
+
+    {% csrf_token %}
+
+    <input
+        type="text"
+        name="title"
+        placeholder="Job Title"
+        required
+    >
+
+    <input
+        type="text"
+        name="company"
+        placeholder="Company Name"
+        required
+    >
+
+    <input
+        type="text"
+        name="location"
+        placeholder="Job Location"
+        required
+    >
+
+    <input
+        type="text"
+        name="salary"
+        placeholder="Salary"
+        required
+    >
+
+    <input
+        type="text"
+        name="experience"
+        placeholder="Experience"
+        required
+    >
+
+    <select name="job_type">
+
+        <option value="">Select Job Type</option>
+
+        <option>Full Time</option>
+
+        <option>Part Time</option>
+
+        <option>Internship</option>
+
+        <option>Remote</option>
+
+    </select>
+
+<div class="form-group">
+
+    <label for="description">Job Description</label>
+
+    <textarea
+        id="description"
+        name="description"
+        placeholder="Describe the job responsibilities..."
+        required
+    ></textarea>
+
+</div>
+
+<div class="form-group">
+
+    <label for="skills">Required Skills</label>
+
+    <textarea
+        id="skills"
+        name="skills"
+        placeholder="Python, Django, HTML, CSS..."
+        required
+    ></textarea>
+
+</div>
+
+
+<div class="form-group">
+
+    <label>Application Deadline</label>
+
+    <input
+        type="date"
+        name="deadline"
+        required
+    >
+
+</div>
+
+    
+
+    <button
+    type="submit"
+    class="post-btn"
+>
+    🚀 Publish Job
+</button>
+
+</form>
+
+        </div>
+
+    </div>
+
+    </section>
+    <script src="{% static 'js/script.js' %}"></script>
+
+    </body>
+    </html>

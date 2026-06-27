@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Jobs</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">JobPortal</div>
+
+    <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'post_job' %}">Post a Job</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+
+</nav>
+
+<section class="jobs-header">
+
+    <h1>Find Your Next Opportunity</h1>
+
+    <p>Discover thousands of jobs from top companies.</p>
+
+    <div class="job-search-box">
+
+        <input
+            type="text"
+            placeholder="Job title, keywords, or company">
+
+        <input
+            type="text"
+            placeholder="City, State or Remote">
+
+        <button>Find Jobs</button>
+
+    </div>
+
+</section>
+
+<section class="welcome-user">
+
+    <h2>Latest Job Openings</h2>
+
+    <p>Choose the opportunity that matches your skills.</p>
+
+</section>
+
+<section class="jobs-list">
+
+{% for job in jobs %}
+
+<div class="job-card-large">
+
+    <span class="easy-apply">
+        Easily Apply
+    </span>
+
+    <div class="job-header">
+
+        <div>
+
+            <h3>{{ job.title }}</h3>
+
+            <h4>{{ job.company }}</h4>
+
+            <p class="location">
+                📍 {{ job.location }}
+            </p>
+
+        </div>
+
+        <div class="salary-box">
+
+            {{ job.salary }}
+
+        </div>
+
+    </div>
+
+    <div class="job-tags">
+
+        <span>{{ job.experience }}</span>
+
+        <span>{{ job.job_type }}</span>
+
+    </div>
+
+    <div class="job-description">
+
+        <h4>Job Description</h4>
+
+        <p>
+            {{ job.description }}
+        </p>
+
+    </div>
+
+    <div class="job-skills">
+
+        <h4>Required Skills</h4>
+
+        <span>{{ job.skills }}</span>
+
+    </div>
+
+    <p class="deadline">
+
+        <strong>Application Deadline:</strong>
+
+        {{ job.deadline }}
+
+    </p>
+
+    <a href="{% url 'apply_job' job.id %}">
+
+        <button class="apply-btn">
+
+            Apply Now
+
+        </button>
+
+    </a>
+
+</div>
+
+{% empty %}
+
+<h2>No Jobs Available</h2>
+
+{% endfor %}
+
+</section>
+
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>
